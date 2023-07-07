@@ -119,7 +119,7 @@ class ReplyCreate(LoginRequiredMixin, CreateView):
 @login_required
 def private_replies(request):
     user = request.user
-    user_posts = user.posts.all()  # Получить все объявления пользователя
+    user_posts = user.post_set.all()  # Получить все объявления пользователя
     selected_post_id = request.GET.get('post')  # Получить выбранное объявление из параметров запроса
 
     # Фильтровать отклики по выбранному объявлению, если оно указано

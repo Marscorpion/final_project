@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-k^8e-+x%p(*9!d_m)t^0%!61c)+y65v_at&5sm*&sk55s)+v0z'
@@ -85,17 +89,25 @@ DATABASES = {
     }
 }
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'seafoamskl'
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'seafoamskl@yandex.ru'
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+
+SERVER_EMAIL = 'seafoamskl@yandex.ru'
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
 
 AUTH_USER_MODEL = 'board.CustomUser'
 
