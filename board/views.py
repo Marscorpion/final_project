@@ -141,6 +141,7 @@ def accept_reply(request, pk):
     if request.method == 'POST':
         reply.approved = True
         reply.save()
+        reply.send_notification_email()
         return HttpResponseRedirect(reverse('post_detail', args=[reply.post.pk]))
     return HttpResponseRedirect(reverse('post_detail', args=[reply.post.pk]))
 
